@@ -10,11 +10,21 @@
 </head>
 
 <body>
-    <div></div>
-    <p><a href="indoor.html">(-86.943852, -34.370095)</a></p>
-    <p><a href="nighttime.html">(88.688318, 97.633906)</a></p>
-    <p><a href="white.html">(76.670923, -179.231431)</a></p>
+    <div class="css-typing">
+        <p>cd cyb3r_spac3</p>
+        <p>ls</p>
+        <p> navigate with the arrow keys</p>
+        <p id="next"><a href="white.html">click to advance into space</a></p>
+    </div>
     <script src="index.js">
+    </script>
+    <script>
+        next.addEventListener("keydown", function (event) {
+            if (event.keyCode == 13) {
+                window.location.href = "white.html"
+            }
+
+        })
     </script>
 </body>
 
