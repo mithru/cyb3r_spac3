@@ -43,16 +43,22 @@
         </a-entity>
         <a-assets>
             <img src="assets/black.jpg" id="360photo">
-            <sound src="assets/whitesoundscape.mp3" id="soundscape"></sound>
-            <video id="360video" src="assets/orangeboxwall2.mov" autoplay loop="true"></video>
+            <sound src="assets/lisa.mp3" id="soundscape" preload="auto"></sound>
+            <!-- <video id="lisa" autoplay loop="false" src="macbootup.mp4"></video> -->
+            <video id="lisa" style="display:none" autoplay crossorigin="anonymous" playsinline webkit-playsinline>
+                <!-- MP4 video source. -->
+                <source type="video/mp4" src="assets/macbootup.mp4" />
+            </video>
             <video id="video" style="display:none" autoplay loop crossorigin="anonymous" playsinline webkit-playsinline>
                 <!-- MP4 video source. -->
-                <source type="video/mp4" src="assets/vrbg.mp4" />
+                <source type="video/mp4" src="assets/extrudedwindows_1.mp4" />
             </video>
         </a-assets>
-        <!-- <a-sky src="#360photo"></a-sky> -->
+        <a-video src="#lisa" rotation="0 -90 0" position="0 0 2"></a-video>
         <a-videosphere src="#video"></a-videosphere>
-
+        <a-entity sound="src: #soundscape"></a-entity>
+        <a-entity id="soundscape" geometry="primitive: plane" visible="false" position="-10 0 0"
+            sound="src: assets/lisa.mp3; autoplay: true; loop: true;"></a-entity>
     </a-scene>
     <!-- <a-scene id='scene2'>
         <a-assets>
