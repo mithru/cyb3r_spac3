@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
-    <title>liminal</title>
+    <script src="https://unpkg.com/super-hands@^3.0.1/dist/super-hands.min.js"></script>
+    <title>pixels</title>
     <script type='text/javascript'>
         // document.ready(setTimeout(function () {
         //     window.location.href = ‘lisa.html‘;
@@ -14,7 +15,7 @@
         window.setTimeout(function () {
             console.log('5 sec');
             window.location.href = "browser.html";
-        }, 45000);
+        }, 30500);
     </script>
 </head>
 
@@ -25,6 +26,7 @@
             <a-cursor></a-cursor>
         </a-camera>
         <a-entity id="camera" camera="userHeight: 1.6" look-controls cursor="rayOrigin: mouse"></a-entity>
+        <!-- <a-entity progressive-controls></a-entity> -->
         <a-assets>
             <img src="assets/black.jpg" id="360photo">
             <sound src="assets/nightscenesoundscape.mp3" id="nightsoundscape"></sound>
@@ -32,16 +34,22 @@
             <img src="assets/extrusion.jpg" id="bg">
             <video id="video" style="display:none" autoplay loop crossorigin="anonymous" playsinline webkit-playsinline>
                 <!-- MP4 video source. -->
-                <source type="video/mp4" src="assets/rgbblockwallaudio.mp4" />
+                <source type="video/mp4" src="assets/staticaudiorgb.mp4" />
             </video>
+            <!-- <a-mixin id="cube" geometry="primitive: box; width: 0.5; height: 0.5; depth: 0.5" hoverable grabbable
+                stretchable draggable droppable shadow
+                event-set__dragdrop="_event: drag-drop; geometry.primitive: sphere; geometry.radius: 0.25"
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"
+                event-set__dragon="_event: dragover-start; material.wireframe: true"
+                event-set__dragoff="_event: dragover-end; material.wireframe: false"> -->
         </a-assets>
         <a-videosphere src="#video"></a-videosphere>
 
         <!-- first layer of pixels -->
-        <a-box box-item color="#000000"
-            animation="property: position; to: 1 3 -1; delay: 50; dur: 20000; easing: easeInOutElastic; loop: true"
-            position="0 1.5 -1" event-set__down="_event: mousedown; scale: .1 .1 .1" height="1" width="1"
-            material="visible: true">
+        <!-- <a-entity class="cube" mixin="cube" position="0 1.5 -.75" material="color: red"></a-entity> -->
+        <a-box box-item color="#777777" geometry hoverable grabbable stretchable draggable dropppable
+            position="0 1.5 -1" height="1" event-set__start="_event: grab-start" width="1" material="visible: true">
         </a-box>
         <a-box box-item color="#000000"
             animation="property: position; to: -1 2 -3; delay: 50; dur: 20000; easing: easeInOutElastic; loop: true"
@@ -66,99 +74,99 @@
             event-set__down="_event: mousedown; scale: .1 .1 .1"></a-box>
 
         <!-- second layer of pixels -->
-        <a-box color=#e27104 animation="property: position; to: 1 1 -1; dur: 1500; easing: easeOutElastic; loop: true"
+        <a-box color=#FF0000 animation="property: position; to: 1 1 -1; dur: 1500; easing: easeOutElastic; loop: true"
             event-set__down="_event: mousedown; scale: 2 2 2" position="0.3 1.5 .8" scale="-1 1 1" height=".4"
             width=".4" depth=".4">
-            <a-box color=#17ac3f position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#876573 position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#1d1469 position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FF00 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF00FF position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
-        <a-box color=#FF0000
+        <a-box color=#00FFFF
             animation="property: position; to: -1 1 -1; dur: 17000; easing: easeInOutElastic; loop: true"
             event-set__down="_event: mousedown; scale: 2 2 2" position="0.3 1.5 .8" height=".4" width=".4" depth=".4">
-            <a-box color=#17ac3f position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#d927a6 position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#1d1469 position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FF00 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF00FF position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
-        <a-box color=#fab345
+        <a-box color=#0000FF
             animation="property: position; to: 1 -1 -1; dur: 1300; easing: easeInOutElastic; loop: true"
             event-set__down="_event: mousedown; scale: 2 2 2" position="0.3 1.5 .8" height=".4" width=".4" depth=".4">
-            <a-box color=#17ac3f position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#876573 position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#e27104 position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FF00 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF00FF position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF0000 position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
-        <a-box color=#7bd26d
+        <a-box color=#00FF00
             animation="property: position; to: 1 -1 1; dur: 14000; easing: easeInOutElastic; loop: true"
             event-set__down="_event: mousedown; scale: 2 2 2" position="0.3 1.5 .8" height=".4" width=".4" depth=".4">
-            <a-box color=#d927a6 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#876573 position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#1d1469 position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF00FF position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF0000 position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
-        <a-box color=#597e74
+        <a-box color=#FF0000
             animation="property: position; to: -1 1 1; dur: 10000; easing: easeInOutElastic; loop: true"
             event-set__down="_event: mousedown; scale: 2 2 2" position="0.3 1.5 .8" height=".4" width=".4" depth=".4">
-            <a-box color=#17ac3f position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#876573 position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#1d1469 position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FF00 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF00FF position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
-        <a-box color=#f86beb
+        <a-box color=#FF00FF
             animation="property: position; to: -1 -1 1; dur: 18000; easing: easeInOutElastic; loop: true"
             event-set__down="_event: mousedown; scale: 2 2 2" position="0.3 1.5 .8" height=".4" width=".4" depth=".4">
-            <a-box color=#17ac3f position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#e27104 position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#1d1469 position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FF00 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FFFF position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
         <a-box color=#FF0000 animation="property: position; to: 2 3 1; dur: 15000; easing: easeInOutElastic; loop: true"
             event-set__down="_event: mousedown; scale: 2 2 2" position="2.6 3.7 -1" height=".4" width=".4" depth=".4">
         </a-box>
-        <a-box color=#26d939
+        <a-box color=#00FF00
             animation="property: position; to: -1 2 3; dur: 20000; easing: easeInOutElastic; loop: true"
             event-set__down="_event: mousedown; scale: 2 2 2" position="-2.3 1.9 1" height=".4" width=".4" depth=".4">
-            <a-box color=#17ac3f position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FFFF position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
             <a-box color=#FF0000 position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#1d1469 position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
-        <a-box color=#354ba4
+        <a-box color=#0000FF
             animation="property: position; to: -2 -3 1; dur: 13000; easing: easeInOutElastic; loop: true"
             event-set__down="_event: mousedown; scale: 2 2 2" position="5 1 -1" height=".4" width=".4" depth=".4">
-            <a-box color=#d927a6 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#876573 position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#1d1469 position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF00FF position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FFFF position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
-        <a-box color=#d927a6
+        <a-box color=#FF00FF
             animation="property: position; to: -3 -1 2; dur: 11000; easing: easeInOutElastic; loop: true"
             event-set__down="_event: mousedown; scale: 2 2 2" position="3 7 -1" height=".4" width=".4" depth=".4">
-            <a-box color=#17ac3f position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#e27104 position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#1d1469 position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FF00 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FFFF position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
-        <a-box color=#599b9a
+        <a-box color=#0000FF
             animation="property: position; to: -2 -2 1; dur: 9000; easing: easeInOutElastic; loop: true"
             event-set__down="_event: mousedown; scale: 2 2 2" position="4 3.7 2" height=".4" width=".4" depth=".4">
-            <a-box color=#17ac3f position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#876573 position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FF00 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
             <a-box color=#FF0000 position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
         <a-box color=#FF0000
             animation="property: position; to: -1 -2 1; dur: 14000; easing: easeInOutElastic; loop: true"
             event-set__down="_event: mousedown; scale: 2 2 2" position="-2.3 1 4" height=".4" width=".4" depth=".4">
-            <a-box color=#17ac3f position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#876573 position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#1d1469 position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FF00 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF00FF position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
-        <a-box color=#504321
+        <a-box color=#0000FF
             animation="property: position; to: -3 -1 2; dur: 13000; easing: easeInOutElastic; loop: true"
             event-set__down="_event: mousedown; scale: 2 2 2" position="-5 2 -3" height=".4" width=".4" depth=".4">
-            <a-box color=#17ac3f position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#d927a6 position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#1d1469 position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FF00 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF00FF position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
-        <a-box color=#1d1469
+        <a-box color=#0000FF
             animation="property: position; to: -4 -1 2; dur: 16000; easing: easeInOutElastic; loop: true"
             event-set__down="_event: mousedown; scale: 2 2 2" position="4 2 -5" height=".4" width=".4" depth=".4">
-            <a-box color=#17ac3f position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FF00 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
             <a-box color=#FF0000 position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#1d1469 position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
     </a-scene>
     <!-- <script>
