@@ -1,0 +1,226 @@
+body {
+    background-color: black;
+}
+
+p {
+    position: relative;
+    font-family: monospace;
+    background-color: black;
+    text-decoration: none;
+    color: green;
+    font-size: 1.5em;
+}
+
+/* code credit: https://blog.carbonfive.com/vintage-terminal-effect-in-css3/ */
+
+.cursor {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background: black;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border-left: .5em solid;
+
+    -webkit-animation: typing 25s steps(200, end) infinite,
+        blinking 1s step-end infinite;
+    animation: typing 25s steps(200, end) infinite,
+        blinking 1s step-end infinite;
+}
+
+.css-typing p {
+    border-right: .15em;
+    /* font-family: "Courier"; */
+    /* font-size: 14px; */
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.css-typing p:nth-child(1) {
+    width: 7em;
+    -webkit-animation: type2 .5s steps(50, end);
+    animation: type2 2s steps(50, end);
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+.css-typing p:nth-child(2) {
+    width: 15em;
+    opacity: 0;
+    -webkit-animation: type2 1s steps(40, end);
+    animation: type2 2s steps(20, end);
+    -webkit-animation-delay: 4.85s;
+    animation-delay: 4.85s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+.css-typing p:nth-child(3) {
+    width: 30em;
+    opacity: 0;
+    -webkit-animation: type2 5s steps(50, end);
+    animation: type2 7s steps(50, end);
+    -webkit-animation-delay: 5s;
+    animation-delay: 7s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+.css-typing p:nth-child(4) {
+    width: 27em;
+    opacity: 0;
+    -webkit-animation: type3 6s steps(100, end), blink .5s step-end infinite alternate;
+    animation: type3 6s steps(100, end), blink .5s step-end infinite alternate;
+    -webkit-animation-delay: 14s;
+    animation-delay: 14s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+
+@-webkit-keyframes typing {
+
+    from,
+    to {
+        width: 100%;
+    }
+
+    25% {
+        width: 0;
+    }
+
+    50% {
+        width: 0;
+    }
+
+    75% {
+        width: 0;
+    }
+
+    100% {
+        width: 0;
+    }
+
+
+}
+
+@keyframes type {
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0;
+    }
+}
+
+@-webkit-keyframes type {
+    0% {
+        width: 0;
+    }
+
+    99.9% {
+        border-right: .15em;
+    }
+
+    100% {
+        border: none;
+    }
+}
+
+@keyframes type2 {
+    0% {
+        width: 0;
+    }
+
+    1% {
+        opacity: 1;
+    }
+
+    99.9% {
+        border-right: .15em;
+    }
+
+    100% {
+        opacity: 1;
+        border: none;
+    }
+}
+
+@-webkit-keyframes type2 {
+    0% {
+        width: 0;
+    }
+
+    1% {
+        opacity: 1;
+    }
+
+    99.9% {
+        border-right: .15em;
+    }
+
+    100% {
+        opacity: 1;
+        border: none;
+    }
+}
+
+@keyframes type3 {
+    0% {
+        width: 0;
+    }
+
+    1% {
+        opacity: 1;
+    }
+
+    99.9% {
+        border-right: .15em;
+    }
+
+    100% {
+        opacity: 1;
+        border: none;
+    }
+}
+
+@-webkit-keyframes type3 {
+    0% {
+        width: 0;
+    }
+
+    1% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes blinking {
+
+    from,
+    to {
+        border-color: transparent;
+    }
+
+    50% {
+        border-color: green;
+    }
+}
+
+@keyframes blinking {
+
+    from,
+    to {
+        border-color: transparent;
+    }
+
+    50% {
+        border-color: green;
+    }
+}
