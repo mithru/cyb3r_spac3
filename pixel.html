@@ -7,11 +7,10 @@
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
     <script src="https://unpkg.com/super-hands@^3.0.1/dist/super-hands.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+
     <title>pixels</title>
     <script type='text/javascript'>
-        // document.ready(setTimeout(function () {
-        //     window.location.href = ‘lisa.html‘;
-        // }, 5000));
         window.setTimeout(function () {
             console.log('5 sec');
             window.location.href = "browser.html";
@@ -23,161 +22,159 @@
 
     <a-scene>
         <a-camera>
-            <a-cursor></a-cursor>
+            <a-entity id="mouseCursor" cursor="rayOrigin: mouse"></a-entity>
         </a-camera>
         <a-entity id="camera" camera="userHeight: 1.6" look-controls cursor="rayOrigin: mouse"></a-entity>
         <!-- <a-entity progressive-controls></a-entity> -->
         <a-assets>
-            <img src="assets/black.jpg" id="360photo">
-            <sound src="assets/nightscenesoundscape.mp3" id="nightsoundscape"></sound>
-            <a-asset-item id="box" src="assets/untitled.gltf"></a-asset-item>
-            <img src="assets/extrusion.jpg" id="bg">
             <video id="video" style="display:none" autoplay loop crossorigin="anonymous" playsinline webkit-playsinline>
                 <!-- MP4 video source. -->
                 <source type="video/mp4" src="assets/staticaudiorgb.mp4" />
             </video>
-            <!-- <a-mixin id="cube" geometry="primitive: box; width: 0.5; height: 0.5; depth: 0.5" hoverable grabbable
-                stretchable draggable droppable shadow
-                event-set__dragdrop="_event: drag-drop; geometry.primitive: sphere; geometry.radius: 0.25"
-                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
-                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"
-                event-set__dragon="_event: dragover-start; material.wireframe: true"
-                event-set__dragoff="_event: dragover-end; material.wireframe: false"> -->
         </a-assets>
         <a-videosphere src="#video"></a-videosphere>
 
         <!-- first layer of pixels -->
-        <!-- <a-entity class="cube" mixin="cube" position="0 1.5 -.75" material="color: red"></a-entity> -->
-        <a-box box-item color="#777777" geometry hoverable grabbable stretchable draggable dropppable
-            position="0 1.5 -1" height="1" event-set__start="_event: grab-start" width="1" material="visible: true">
-        </a-box>
+
         <a-box box-item color="#000000"
-            animation="property: position; to: -1 2 -3; delay: 50; dur: 20000; easing: easeInOutElastic; loop: true"
+            animation="property: position; to: -1 1.3 -3; delay: 100; dur: 30000; easing: easeInOutElastic; loop: true"
+            animation__2="property: rotation; to: 90 0 180; loop: true; dur: 30000"
+            event-set__down="_event: mousedown; scale: .1 .1 .1" position="0 1.5 -1" height="1" width="1"
+            material="visible: true"></a-box>
+        <a-box box-item color="#000000"
+            animation="property: position; to: -1 2.1 -3; delay: 50; dur: 30000; easing: easeInOutElastic; loop: true"
+            animation__2="property: rotation; to: 0 90 90; loop: true; dur: 30000"
             event-set__down="_event: mousedown; scale: .1 .1 .1" position="0 1.5 1" height="1" width="1"
             material="visible: true"></a-box>
         <a-box box-item color="#000000"
-            animation="property: position; to: .5 -1 2; delay: 100; dur: 20000; easing: easeInOutElastic; loop: true"
-            position="1 1.5 0" height="1" width="1" material="visible: true"
-            event-set__down="_event: mousedown; scale: .1 .1 .1">
+            animation="property: position; to: .5 -1.6 2; delay: 100; dur: 30000; easing: easeInOutElastic; loop: true"
+            animation__2="property: rotation; to: 90 180 0; loop: true; dur: 30000" position="1 1.5 0" height="1"
+            width="1" material="visible: true" event-set__down="_event: mousedown; scale: .1 .1 .1">
         </a-box>
         <a-box box-item color="#000000"
-            animation="property: position; to: 1 -2 5; dur: 20000; easing: easeInOutElastic; loop: true"
-            position="-1 1.5 0" height="1" width="1" material="visible: true"
-            event-set__down="_event: mousedown; scale: .1 .1 .1"></a-box>
+            animation="property: position; to: 1 -1.8 5; dur: 30000; easing: easeInOutElastic; loop: true"
+            animation__2="property: rotation; to: 0 90 90; loop: true; dur: 30000" position="-1 1.5 0" height="1"
+            width="1" material="visible: true" event-set__down="_event: mousedown; scale: .1 .1 .1"></a-box>
         <a-box box-item color="#000000"
-            animation="property: position; to: -3 1 -5; delay: 1000; dur: 20000; easing: easeInOutElastic; loop: true"
-            position="0 2.5 0" height="1" width="1" material="visible: true"
-            event-set__down="_event: mousedown; scale: .1 .1 .1"></a-box>
+            animation="property: position; to: -3 1.1 -5; delay: 500; dur: 30000; easing: easeInOutElastic; loop: true"
+            animation__2="property: rotation; to: 90 90 180; loop: true; dur: 30000" position="0 2.5 0" height="1"
+            width="1" material="visible: true" event-set__down="_event: mousedown; scale: .1 .1 .1"></a-box>
         <a-box box-item color="#000000"
-            animation="property: position; to: 1 2 3; delay: 10; dur: 20000; easing: easeInOutElastic; loop: true"
-            position="0 .5 0" height="1" width="1" material="visible: true"
-            event-set__down="_event: mousedown; scale: .1 .1 .1"></a-box>
+            animation="property: position; to: 1 1.9 3; delay: 10; dur: 30000; easing: easeInOutElastic; loop: true"
+            animation__2="property: rotation; to: 180 0 90; loop: true; dur: 30000" position="0 .5 0" height="1"
+            width="1" material="visible: true" event-set__down="_event: mousedown; scale: .1 .1 .1"></a-box>
 
         <!-- second layer of pixels -->
-        <a-box color=#FF0000 animation="property: position; to: 1 1 -1; dur: 1500; easing: easeOutElastic; loop: true"
+        <a-box color=#FF0000
+            animation="property: position; to: 1 1.4 -1; dur: 30000; easing: easeOutElastic; loop: true"
+            animation__2="property: rotation; to: 90 90 90; loop: true; dur: 30000"
             event-set__down="_event: mousedown; scale: 2 2 2" position="0.3 1.5 .8" scale="-1 1 1" height=".4"
             width=".4" depth=".4">
-            <a-box color=#00FF00 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#FF00FF position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FF00 position="0.1 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF00FF position="0.6 -1.7 -1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="0.9 1.9 1.2" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
         <a-box color=#00FFFF
-            animation="property: position; to: -1 1 -1; dur: 17000; easing: easeInOutElastic; loop: true"
-            event-set__down="_event: mousedown; scale: 2 2 2" position="0.3 1.5 .8" height=".4" width=".4" depth=".4">
+            animation="property: position; to: -1 1 -1; dur: 30000; easing: easeInOutElastic; loop: true"
+            animation__2="property: rotation; to: 180 0 90; loop: true; dur: 30000"
+            event-set__down="_event: mousedown; scale: 2 2 2" position="0.3 -1.5 .8" height=".4" width=".4" depth=".4">
             <a-box color=#00FF00 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
             <a-box color=#FF00FF position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
             <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
         <a-box color=#0000FF
-            animation="property: position; to: 1 -1 -1; dur: 1300; easing: easeInOutElastic; loop: true"
-            event-set__down="_event: mousedown; scale: 2 2 2" position="0.3 1.5 .8" height=".4" width=".4" depth=".4">
-            <a-box color=#00FF00 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#FF00FF position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#FF0000 position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            animation="property: position; to: 1 -2.2 -1; dur: 30000; easing: easeInOutElastic; loop: true"
+            animation__2="property: rotation; to: 90 0 180; loop: true; dur: 30000"
+            event-set__down="_event: mousedown; scale: 2 2 2" position="1 0.3 .8" height=".4" width=".4" depth=".4">
+            <a-box color=#00FF00 position="1.1 0.5 -1.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF00FF position="1.2 1.7 -2" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF0000 position="0.6 0.9 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
-        <a-box color=#00FF00
-            animation="property: position; to: 1 -1 1; dur: 14000; easing: easeInOutElastic; loop: true"
-            event-set__down="_event: mousedown; scale: 2 2 2" position="0.3 1.5 .8" height=".4" width=".4" depth=".4">
-            <a-box color=#FF00FF position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#FF0000 position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+        <a-box color=#00FF00 animation="property: position; to: 1 1 1; dur: 30000; easing: easeInOutElastic; loop: true"
+            animation__2="property: rotation; to: 180 0 180; loop: true; dur: 30000"
+            event-set__down="_event: mousedown; scale: 2 2 2" position="2.4 -0.7 .8" height=".4" width=".4" depth=".4">
+            <a-box color=#FF00FF position="1.5 -1.5 0.5" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF0000 position="0.4 1 -2" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="2.1 0.9 -1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
         <a-box color=#FF0000
-            animation="property: position; to: -1 1 1; dur: 10000; easing: easeInOutElastic; loop: true"
-            event-set__down="_event: mousedown; scale: 2 2 2" position="0.3 1.5 .8" height=".4" width=".4" depth=".4">
-            <a-box color=#00FF00 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#FF00FF position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            animation="property: position; to: -1 2.2 1; dur: 30000; easing: easeInOutElastic; loop: true"
+            animation__2="property: rotation; to: 90 0 0; loop: true; dur: 30000"
+            event-set__down="_event: mousedown; scale: 2 2 2" position="1 -1.5 -.8" height=".4" width=".4" depth=".4">
+            <a-box color=#00FF00 position="0.1 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF00FF position="0.6 0.7 -1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="-1.1 1.9 -0.7" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
         <a-box color=#FF00FF
-            animation="property: position; to: -1 -1 1; dur: 18000; easing: easeInOutElastic; loop: true"
-            event-set__down="_event: mousedown; scale: 2 2 2" position="0.3 1.5 .8" height=".4" width=".4" depth=".4">
-            <a-box color=#00FF00 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#00FFFF position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            animation="property: position; to: -1 1.7 1; dur: 30000; easing: easeInOutElastic; loop: true"
+            animation__2="property: rotation; to: 180 90 90; loop: true; dur: 30000"
+            event-set__down="_event: mousedown; scale: 2 2 2" position="2 1.2 -1.8" height=".4" width=".4" depth=".4">
+            <a-box color=#00FF00 position="-2 0.5 1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FFFF position="-0.6 2 -0.2" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="0.8 1.4 -1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
-        <a-box color=#FF0000 animation="property: position; to: 2 3 1; dur: 15000; easing: easeInOutElastic; loop: true"
+        <a-box color=#FF0000 animation="property: position; to: 2 3 1; dur: 30000; easing: easeInOutElastic; loop: true"
+            animation__2="property: rotation; to: 0 0 180; loop: true; dur: 30000"
             event-set__down="_event: mousedown; scale: 2 2 2" position="2.6 3.7 -1" height=".4" width=".4" depth=".4">
         </a-box>
         <a-box color=#00FF00
-            animation="property: position; to: -1 2 3; dur: 20000; easing: easeInOutElastic; loop: true"
+            animation="property: position; to: -1 1 3; dur: 30000; easing: easeInOutElastic; loop: true"
+            animation__2="property: rotation; to: 90 0 180; loop: true; dur: 30000"
             event-set__down="_event: mousedown; scale: 2 2 2" position="-2.3 1.9 1" height=".4" width=".4" depth=".4">
-            <a-box color=#00FFFF position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#FF0000 position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FFFF position="1.3 1.5 -1.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF0000 position="1.6 1.7 -1.1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="1.3 -1.9 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
         <a-box color=#0000FF
-            animation="property: position; to: -2 -3 1; dur: 13000; easing: easeInOutElastic; loop: true"
+            animation="property: position; to: -2 -1.5 1; dur: 30000; easing: easeInOutElastic; loop: true"
+            animation__2="property: rotation; to: 90 90 90; loop: true; dur: 30000"
             event-set__down="_event: mousedown; scale: 2 2 2" position="5 1 -1" height=".4" width=".4" depth=".4">
-            <a-box color=#FF00FF position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#00FFFF position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF00FF position="0.7 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FFFF position="0.6 1.7 -1.7" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="0.3 1.7 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
         <a-box color=#FF00FF
-            animation="property: position; to: -3 -1 2; dur: 11000; easing: easeInOutElastic; loop: true"
+            animation="property: position; to: -3 -1.1 2; dur: 30000; easing: easeInOutElastic; loop: true"
+            animation__2="property: rotation; to: 90 90 180; loop: true; dur: 30000"
             event-set__down="_event: mousedown; scale: 2 2 2" position="3 7 -1" height=".4" width=".4" depth=".4">
-            <a-box color=#00FF00 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#00FFFF position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FF00 position="1.3 0.5 -.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FFFF position="1.6 0.7 -1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="0.3 0.9 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
         <a-box color=#0000FF
-            animation="property: position; to: -2 -2 1; dur: 9000; easing: easeInOutElastic; loop: true"
+            animation="property: position; to: -2 2 1; dur: 30000; easing: easeInOutElastic; loop: true"
+            animation__2="property: rotation; to: 90 0 90; loop: true; dur: 30000"
             event-set__down="_event: mousedown; scale: 2 2 2" position="4 3.7 2" height=".4" width=".4" depth=".4">
-            <a-box color=#00FF00 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#0000FF position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#FF0000 position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FF00 position="0.2 -1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="1.3 1.2 -1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF0000 position="1.3 1.1 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
         <a-box color=#FF0000
-            animation="property: position; to: -1 -2 1; dur: 14000; easing: easeInOutElastic; loop: true"
+            animation="property: position; to: -1 2.4 1; dur: 30000; easing: easeInOutElastic; loop: true"
+            animation__2="property: rotation; to: 180 0 180; loop: true; dur: 30000"
             event-set__down="_event: mousedown; scale: 2 2 2" position="-2.3 1 4" height=".4" width=".4" depth=".4">
-            <a-box color=#00FF00 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#FF00FF position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FF00 position="-0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF00FF position="0.6 -1.7 -1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="-0.3 -1.9 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
         <a-box color=#0000FF
-            animation="property: position; to: -3 -1 2; dur: 13000; easing: easeInOutElastic; loop: true"
+            animation="property: position; to: -3 -1 2; dur: 30000; easing: easeInOutElastic; loop: true"
+            animation__2="property: rotation; to: 180 360 90; loop: true; dur: 30000"
             event-set__down="_event: mousedown; scale: 2 2 2" position="-5 2 -3" height=".4" width=".4" depth=".4">
-            <a-box color=#00FF00 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#FF00FF position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FF00 position="0.3 1.5 .8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF00FF position="0.6 1.7 1" height=".4" width=".4" depth=".4"></a-box>
             <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
         <a-box color=#0000FF
-            animation="property: position; to: -4 -1 2; dur: 16000; easing: easeInOutElastic; loop: true"
+            animation="property: position; to: -4 1.7 2; dur: 30000; easing: easeInOutElastic; loop: true"
+            animation__2="property: rotation; to: 90 90 180; loop: true; dur: 30000"
             event-set__down="_event: mousedown; scale: 2 2 2" position="4 2 -5" height=".4" width=".4" depth=".4">
-            <a-box color=#00FF00 position="0.3 1.5 -.8" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#FF0000 position="0.6 1.7 -1" height=".4" width=".4" depth=".4"></a-box>
-            <a-box color=#0000FF position="0.3 1.9 1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#00FF00 position="0.3 1.5 .8" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#FF0000 position="0.6 -1.7 -1" height=".4" width=".4" depth=".4"></a-box>
+            <a-box color=#0000FF position="0.3 -1.9 0.2" height=".4" width=".4" depth=".4"></a-box>
         </a-box>
     </a-scene>
-    <!-- <script>
-        box.addEventListener("mouseenter", function () {
-            box.setAttribute("scale", {
-                x: 0.5
-                y: 2
-                z: 1
-            })
-        })
-    </script> -->
+
 </body>
 
 </html>
