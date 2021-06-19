@@ -8,7 +8,7 @@
 
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
-    <!-- <script src="https://unpkg.com/super-hands@^3.0.1/dist/super-hands.min.js"></script> -->
+    <script src="https://unpkg.com/super-hands@^3.0.1/dist/super-hands.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js">
     </script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v3.13.1/dist/aframe-extras.min.js"></script>
@@ -20,9 +20,18 @@
             document.getElementById('scene2').setAttribute('visible', 'true');
         }
 
-        function setScene1() {
+        function setScene3() {
             document.getElementById('scene2').setAttribute('visible', 'false');
+            document.getElementById('scene3').setAttribute('visible', 'true');
+        }
+
+        function setScene1() {
+            document.getElementById('scene3').setAttribute('visible', 'false');
             document.getElementById('scene1').setAttribute('visible', 'true');
+        }
+
+        function rotateBox() {
+            document.getElementById('boxscreen').setAttribute('rotation', '180 0 0')
         }
     </script>
     <!-- <script>
@@ -43,12 +52,11 @@
                              colliderEndEventProperty: clearedEls;">
         </a-entity>
         <a-assets>
-            <video id="video" style="display:none" autoplay crossorigin="anonymous" playsinline webkit-playsinline>
+            <video id="mac" style="display:none" autoplay crossorigin="anonymous" playsinline webkit-playsinline>
                 <!-- MP4 video source. -->
                 <source type="video/mp4" src="assets/extrudedwindows_1.mp4" />
             </video>
-            <video id="video2" style="display:none" autoplay loop crossorigin="anonymous" playsinline
-                webkit-playsinline>
+            <video id="rgb" style="display:none" autoplay loop crossorigin="anonymous" playsinline webkit-playsinline>
                 <!-- MP4 video source. -->
                 <source type="video/mp4" src="assets/staticaudiorgb.mp4" />
             </video>
@@ -59,8 +67,12 @@
                 shadow>
             </a-mixin>
         </a-assets>
-        <!-- <a-videosphere src="#video"></a-videosphere>
-        <a-videosphere src="#video2"></a-videosphere> -->
+        <a-entity laser-controls="hand: left; handModelStyle: lowPoly; color:#ffcccc" aabb-collider="objects: .cube;"
+            grab magicleap-controls vive-controls oculus-touch-controls window-motion-controls>
+        </a-entity>
+        <a-entity laser-controls="hand: right; handModelStyle: lowPoly; color:#ffcccc" aabb-collider="objects: .cube;"
+            grab magicleap-controls vive-controls oculus-touch-controls window-motion-controls>
+        </a-entity>
         <!-- <a-entity>
             <a-camera positon="0 1.6 0"></a-camera>
             <a-entity id="rhand" mixin="touch" hand-controls="hand: right">
@@ -69,21 +81,263 @@
             </a-entity>
         </a-entity> -->
         <a-entity id="scene1" visible="true">
-            <a-entity onclick="setScene2()" class="cube" mixin="cube" position="0 3.5 1" material="color: #FF0000">
+            <a-videosphere src="#mac"></a-videosphere>
+            <a-entity onclick="setScene2()" class="cube" mixin="cube" position="0 0 1" material="color: #FF0000">
             </a-entity>
-            <a-entity onclick="setScene2()" class="cube" mixin="cube" position="0 -2.5 1" material="color: #00FF00">
-            </a-entity>
-            <a-entity onclick="setScene2()" class="cube" mixin="cube" position="0.3 0 -1" material="color: #FF00FF">
-            </a-entity>
-            <a-entity onclick="setScene2()" class="cube" mixin="cube" position="-0.3 0 -1" material="color: #0000FF">
-            </a-entity>
-            <a-entity onclick="setScene2()" class="cube" mixin="cube" position="-0.3 0 -1" material="color: #00FFFF">
-            </a-entity>
-            <a-box box-item event-set__down="_event: mousedown; setScene2()" color="#000000" position="-1 0 0"
-                height="1" width="1" depth="1">
-            </a-box>
         </a-entity>
         <a-entity id="scene2" visible="false">
+            <!-- <a-entity onclick="setScene3()" class="cube" mixin="cube" position="0 3.5 1" material="color: #FF0000">
+            </a-entity>
+            <a-entity onclick="setScene3()" class="cube" mixin="cube" position="0 -2.5 1" material="color: #00FF00">
+            </a-entity>
+            <a-entity onclick="setScene3()" class="cube" mixin="cube" position="0.3 0 -1" material="color: #FF00FF">
+            </a-entity>
+            <a-entity onclick="setScene3()" class="cube" mixin="cube" position="-0.3 0 -1" material="color: #0000FF">
+            </a-entity>
+            <a-entity onclick="setScene3()" class="cube" mixin="cube" position="-0.3 0 -1" material="color: #00FFFF">
+            </a-entity> -->
+
+            <a-videosphere src="#rgb"></a-videosphere>
+            <!-- boundaries -->
+
+            <a-plane scale="50 50 1" position="0 -15 0" rotation="90 0 0" static-body></a-plane>
+            <a-plane scale="50 50 1" position="0 0 15" rotation="0 0 0" static-body></a-plane>
+            <a-plane scale="50 50 1" position="0 0 -15" rotation="0 180 0" static-body></a-plane>
+            <a-plane scale="50 50 1" position="0 15 0" rotation="-90 0 0" static-body></a-plane>
+            <a-plane scale="50 50 1" position="15 0 0" rotation="0 90 -90" static-body></a-plane>
+            <a-plane scale="50 50 1" position="-15 0 0" rotation="0 -90 90" static-body></a-plane>
+
+            <!-- first layer of pixels -->
+
+
+            <a-entity class="cube" mixin="cube" position="0 1.5 -1" material="color: #000000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 1.5 0" material="color: #000000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 1.5 0" material="color: #000000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 0.5 0" material="color: #000000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 2.5 0" material="color: #000000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 1.5 1" material="color: #000000"></a-entity>
+
+            <!-- second layer of pixels -->
+
+            <a-entity class="cube" mixin="cube" position="0 3.5 1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 -2.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0.3 0 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 0 -1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 0 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="0.3 1 0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 0.3 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 0.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 0 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="0.3 0.3 -0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0.5 1 0.3" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0.3 0.3 0" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 0.3 0" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="0 1.7 -1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1.2 1.5 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 1.7 0" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0.3 0.3 0" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 0.3 0" material="color: #00FFFF"></a-entity>
+
+
+            <a-entity class="cube" mixin="cube" position="0 3.5 1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 -2.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0.3 0 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 0 -3" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 0 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="3.3 1 0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3 0.3 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 1 -3" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 0.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3 0 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="0.3 3.3 -0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3.5 1 0.3" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 3 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3.3 3.3 0" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 3.3 0" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="0 3.7 -3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3.2 3.5 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3 3.7 0" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3.3 3.3 3" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3 3.3 3" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="-2 3.5 1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 -2.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1.3 -4 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 0 -1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-2.3 0 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="0.3 -2 0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 0.3 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 -1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1.3 0.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 0 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="-3.3 -0.3 -0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.5 1 0.3" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0.3 -1.3 0" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-2 2.3 0" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="0 -1.7 -1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1.2 1.5 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 -1.7 0" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-2.3 0.3 0" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 -2.3 0" material="color: #00FFFF"></a-entity>
+
+
+            <a-entity class="cube" mixin="cube" position="0 -3.5 1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 -2.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 -1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 0 -3" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 0 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="3.3 -1 0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3 0.3 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 -1 -3" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 -0.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3 0 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="-1.3 3.3 -0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.5 1 0.3" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 -3 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 -3.3 0" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 3.3 0" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="-1 3.7 -3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.2 3.5 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3 3.7 0" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 0.3 3" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3 3.3 3" material="color: #00FFFF"></a-entity>
+
+
+
+            <!-- repeat -->
+
+            <a-entity class="cube" mixin="cube" position="1 3.5 1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 -2.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0.3 1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1.3 0 -1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 1 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="1.3 1 0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 1.3 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 1.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 1 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="0.3 1.3 -0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0.5 1 1.3" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1.3 0.3 0" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 1.3 0" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="1 1.7 -1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1.2 1.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 1.7 1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0.3 0.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 1.3 1" material="color: #00FFFF"></a-entity>
+
+
+            <a-entity class="cube" mixin="cube" position="1 3.5 1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 -2.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1.3 0 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1.3 0 -3" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 1 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="3.3 1 1.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3 1.3 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 1 -3" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 1.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3 1 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="1.3 3.3 -0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3.5 1 1.3" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 3 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3.3 3.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 3.3 0" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="1 3.7 -3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3.2 3.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3 3.7 1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3.3 -3.3 3" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3 3.3 -3" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="-2 3.5 1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 -2.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1.3 -4 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 1 -1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-2.3 1 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="1.3 -2 0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 1.3 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 -1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1.3 1.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 0 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="-3.3 -1.3 -0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1.5 1 0.3" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1.3 -1.3 0" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-2 2.3 1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="1 -1.7 -1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1.2 1.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 -1.7 1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-2.3 0.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 -2.3 0" material="color: #00FFFF"></a-entity>
+
+
+            <a-entity class="cube" mixin="cube" position="1 -3.5 1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 -2.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1.3 -1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 1 -3" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 1 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="3.3 -1 1.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3 1.3 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 -1 -3" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 -1.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3 1 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="-1.3 3.3 -1.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.5 1 1.3" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 -3 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 -3.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 3.3 0" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="-1 3.7 -3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.2 3.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3 3.7 1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 1.3 3" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3 1.3 3" material="color: #00FFFF"></a-entity>
+
+
+        </a-entity>
+        <a-entity id="scene3" visible="false">
+            <!-- <a-box id="boxscreen" src="#texture" opacity="0.7" height="10" width="10" position="0 0 -5"
+                animation__mouseenter="_event: mousedown; property: rotation; to: 180 0 0; dur: 5000; easing: easeOutElastic; loop: true; delay: 2000">
+            </a-box> -->
+            <a-entity class="cube" mixin="cube" position="0 0 -5" scale="10 10 10" material="color: #890088"></a-entity>
+            <a-box box-item color="#890088" height="10" depth="10" width="10" position="0 -10 0" rotation="90 90 90"
+                event-set__down="_event: mousedown; rotation: 0 90 0; dur: 500; easing: easeInOutElastic"></a-box>
+            <a-box src="#texture" height="10" width="10" position="-5 0 0" rotation="0 -90 0"></a-box>
+            <a-box color="#060606" height="10" width="10" position="0 0 5" rotation="0 0 90"></a-box>
+            <a-box color="#777777" height="10" width="10" position="0 5 0" rotation="90 0 90"></a-box>
+
+            <!-- second room layer -->
+            <a-box color="#900900" height="10" width="10" position="5 0 -5" rotation="0 90 0"></a-box>
+            <a-box color="#777777" height="10" width="10" position="0 5 -5" rotation="90 0 90"></a-box>
+            <a-box src="#texture" height="10" width="10" position="-5 0 -5" rotation="0 -90 0"></a-box>
+        </a-entity>
+        <a-entity id="scene4" visible="false">
             <sky src="#360photo"></sky>
             <a-entity onclick="setScene1()" class="cube" mixin="cube" position="0 0 1" material="color: #FF0000">
             </a-entity>
