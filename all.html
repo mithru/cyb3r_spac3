@@ -34,17 +34,12 @@
             document.getElementById('boxscreen').setAttribute('rotation', '180 0 0')
         }
     </script>
-    <!-- <script>
-        document.querySelector('#scene1').addEventListener('click', function () {
-            document.querySelector('#scene1').setAttribute('visible', 'false')
-            document.querySelector('#scene2').setAttribute('visible', 'true')
-        })
-    </script> -->
+
 </head>
 
 <body>
 
-    <a-scene physics="debug: true; gravity: 0;">
+    <a-scene raycaster="objects: [cube]" physics="debug: true; gravity: 0;">
         <a-entity movement-controls="speed: 3" camera look-controls wasd-controls position="0 1.6 0" capture-mouse
             raycaster cursor="rayOrigin:mouse" body="type: static; shape: sphere; sphereRadius: 0.001" super-hands="colliderEvent: raycaster-intersection;
                              colliderEventProperty: els;
@@ -76,7 +71,7 @@
         <a-entity laser-controls="hand: left" raycaster="objects: [mixin='cube']" grab magicleap-controls vive-controls
             oculus-touch-controls window-motion-controls>
         </a-entity>
-        <a-entity laser-controls="hand: left" raycaster="objects: [mixin='cube']" grab magicleap-controls vive-controls
+        <a-entity laser-controls="hand: right" raycaster="objects: [mixin='cube']" grab magicleap-controls vive-controls
             oculus-touch-controls window-motion-controls>
         </a-entity>
         <!-- <a-entity>
