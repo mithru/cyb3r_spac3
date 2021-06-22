@@ -47,15 +47,6 @@
                              colliderEndEventProperty: clearedEls;">
         </a-entity>
         <a-assets>
-            <video id="mac1" style="display:none" autoplay crossorigin="anonymous" playsinline webkit-playsinline>
-                <!-- MP4 video source. -->
-                <source type="video/mp4" src="assets/extrudedwindows_1.mp4" />
-            </video>
-            <video id="rgb" style="display:none" autoplay loop crossorigin="anonymous" playsinline webkit-playsinline>
-                <!-- MP4 video source. -->
-                <source type="video/mp4" src="assets/staticaudiorgb.mp4" />
-            </video>
-            <img src="assets/black.jpg" id="360photo">
             <!-- box component mixin -->
             <a-mixin id="cube" class="cube" geometry="primitive: box; width: 1; height: 1; depth: 1" hoverable grabbable
                 stretchable draggable droppable
@@ -63,6 +54,7 @@
                 event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false" body="shape: box">
             </a-mixin>
             <!-- scene 1 mac app textures -->
+            <img src="assets/black.jpg" id="360photo">
             <image id="mac2" src="assets/mac.png"></image>
             <image id="graph" src="assets/graph1.png"></image>
             <image id="map" src="assets/map.png"></image>
@@ -71,6 +63,22 @@
             <image id="graphcontrols" src="assets/graphcontrols.png"></image>
             <image id="building" src="assets/building.png"></image>
             <!-- <a-asset-item id="model" src="lisa/scene.gltf"></a-asset-item> -->
+            <a-asset-item id="mouse" src="assets/mouse_cursor/scene.gltf"></a-asset-item>
+            <video id="bootup" style="display:none" autoplay src="assets/bootup.mp4" crossorigin="anonymous" playsinline
+                webkit-playsinline>
+            </video>
+            <video id="mac1" style="display:none" autoplay loop="true" crossorigin="anonymous" playsinline
+                webkit-playsinline>
+                <!-- MP4 video source. -->
+                <source type="video/mp4" src="assets/extrudedwindows_1.mp4" />
+            </video>
+
+
+            <!-- scene 2 assets -->
+            <video id="rgb" style="display:none" autoplay loop crossorigin="anonymous" playsinline webkit-playsinline>
+                <!-- MP4 video source. -->
+                <source type="video/mp4" src="assets/staticaudiorgb.mp4" />
+            </video>
         </a-assets>
         <!-- <a-entity laser-controls="hand: left; handModelStyle: lowPoly; color:#ffcccc" aabb-collider="objects: .cube;"
             grab magicleap-controls vive-controls oculus-touch-controls window-motion-controls>
@@ -92,8 +100,25 @@
             </a-entity>
         </a-entity> -->
         <a-entity id="scene1" visible="true">
-            <a-videosphere src="#mac"></a-videosphere>
-            <a-sky src="#360photo"></a-sky>
+            <!-- background video overlays -->
+            <a-videosphere src="#mac1" rotation="0 -90 0" loop="true" segments-width="0.01" segments-height="0.01"
+                opacity="0.5">
+            </a-videosphere>
+            <a-videosphere src="#mac1" rotation="90 0 0" loop="true" segments-width="0.01" segments-height="0.01"
+                opacity="0.5">
+            </a-videosphere>
+            <a-videosphere src="#mac1" rotation="0 0 90" loop="true" segments-width="0.01" segments-height="0.01"
+                opacity="0.5">
+            </a-videosphere>
+            <a-videosphere src="#mac1" rotation="0 90 0" loop="true" segments-width="0.01" segments-height="0.01"
+                opacity="1">
+            </a-videosphere>
+            <!-- <a-video src=" #bootup" autoplay width="15" height="10" position="0 1.6 -1"
+                animation="property: visible; to: false; delay: 7700;"> -->
+            </a-video>
+            <!-- <a-sky src="#360photo"></a-sky> -->
+
+
             <a-image src="#mac2" position="0 1.6 -25" height="20" width="30" rotation="0 0 0" scale="2 2 2"></a-image>
             <a-box src="#graph" position="0 1 -3" hoverable grabbable stretchable draggable droppable
                 event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
@@ -115,13 +140,21 @@
                 event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
                 event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false">
             </a-box>
-            <a-box src="#map" position="2 1 -3"></a-box>
-            <a-entity onclick="setScene2()" class="cube" mixin="cube" position="0 0 1" material="color: #FF0000">
+            <a-box src="#map" position="2 1 -3" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"></a-box>
+            <!-- <a-entity onclick="setScene2()" class="cube" mixin="cube" position="0 0 1" material="color: #FF0000"> -->
+            <a-entity gltf-model="#mouse" mixin="cube" onclick="setScene2()" rotation="90 0 0" position="0 1 -2"
+                scale="0.03 0.03 0.03">
             </a-entity>
-            <!-- <a-entity gltf-model="#model" position="0 -1.3 -2" scale="0.005 0.005 0.005" rotation="180 90 180">
-            </a-entity> -->
         </a-entity>
+
+        <!-- scene 2 -->
+
         <a-entity id="scene2" visible="false" physics="debug: true; gravity: 0;">
+            <!-- <a-entity gltf-model="#mouse" mixin="cube" onclick="setScene3()" rotation="90 0 0" position="0 1 -2"
+                scale="0.03 0.03 0.03">
+            </a-entity> -->
             <!-- <a-entity onclick="setScene3()" class="cube" mixin="cube" position="0 3.5 1" material="color: #FF0000">
             </a-entity>
             <a-entity onclick="setScene3()" class="cube" mixin="cube" position="0 -2.5 1" material="color: #00FF00">
