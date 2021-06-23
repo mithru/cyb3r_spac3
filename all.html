@@ -62,12 +62,12 @@
             <image id="control2" src="assets/controls2.png"></image>
             <image id="graphcontrols" src="assets/graphcontrols.png"></image>
             <image id="building" src="assets/building.png"></image>
-            <!-- <a-asset-item id="model" src="lisa/scene.gltf"></a-asset-item> -->
+            <a-asset-item id="model" src="assets/lisa/scene.gltf"></a-asset-item>
             <a-asset-item id="mouse" src="assets/mouse_cursor/scene.gltf"></a-asset-item>
             <video id="bootup" style="display:none" autoplay src="assets/bootup.mp4" crossorigin="anonymous" playsinline
                 webkit-playsinline>
             </video>
-            <video id="mac1" style="display:none" autoplay loop="true" crossorigin="anonymous" playsinline
+            <video id="mac1" style="display:none" autoplay loop="true" volume="0" crossorigin="anonymous" playsinline
                 webkit-playsinline>
                 <!-- MP4 video source. -->
                 <source type="video/mp4" src="assets/extrudedwindows_1.mp4" />
@@ -79,6 +79,16 @@
                 <!-- MP4 video source. -->
                 <source type="video/mp4" src="assets/staticaudiorgb.mp4" />
             </video>
+
+            <!-- scene 3 assets -->
+
+            <!-- scene 4 assets -->
+            <video id="boxspace" style="display:none" autoplay loop crossorigin="anonymous" playsinline
+                webkit-playsinline>
+                <!-- MP4 video source. -->
+                <source type="video/mp4" src="assets/cubebrowser_1.mp4" />
+            </video>
+            <image id="desktop" src="assets/vrdesktop.jpg"></image>
         </a-assets>
         <!-- <a-entity laser-controls="hand: left; handModelStyle: lowPoly; color:#ffcccc" aabb-collider="objects: .cube;"
             grab magicleap-controls vive-controls oculus-touch-controls window-motion-controls>
@@ -100,72 +110,6 @@
             </a-entity>
         </a-entity> -->
         <a-entity id="scene1" visible="true">
-            <!-- background video overlays -->
-            <a-videosphere src="#mac1" rotation="0 -90 0" loop="true" segments-width="0.01" segments-height="0.01"
-                opacity="0.5">
-            </a-videosphere>
-            <a-videosphere src="#mac1" rotation="90 0 0" loop="true" segments-width="0.01" segments-height="0.01"
-                opacity="0.5">
-            </a-videosphere>
-            <a-videosphere src="#mac1" rotation="0 0 90" loop="true" segments-width="0.01" segments-height="0.01"
-                opacity="0.5">
-            </a-videosphere>
-            <a-videosphere src="#mac1" rotation="0 90 0" loop="true" segments-width="0.01" segments-height="0.01"
-                opacity="1">
-            </a-videosphere>
-            <!-- <a-video src=" #bootup" autoplay width="15" height="10" position="0 1.6 -1"
-                animation="property: visible; to: false; delay: 7700;"> -->
-            </a-video>
-            <!-- <a-sky src="#360photo"></a-sky> -->
-
-
-            <a-image src="#mac2" position="0 1.6 -25" height="20" width="30" rotation="0 0 0" scale="2 2 2"></a-image>
-            <a-box src="#graph" position="0 1 -3" hoverable grabbable stretchable draggable droppable
-                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
-                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false">
-            </a-box>
-            <a-box src="#control" position="-2 1 -3" hoverable grabbable stretchable draggable droppable
-                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
-                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false">
-            </a-box>
-            <a-box src="#control2" position="-2 2 -2" hoverable grabbable stretchable draggable droppable
-                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
-                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false">
-            </a-box>
-            <a-box src="#graphcontrols" position="1 2 -3" hoverable grabbable stretchable draggable droppable
-                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
-                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false">
-            </a-box>
-            <a-box src="#building" position="-1 2 -2.5" hoverable grabbable stretchable draggable droppable
-                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
-                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false">
-            </a-box>
-            <a-box src="#map" position="2 1 -3" hoverable grabbable stretchable draggable droppable
-                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
-                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"></a-box>
-            <!-- <a-entity onclick="setScene2()" class="cube" mixin="cube" position="0 0 1" material="color: #FF0000"> -->
-            <a-entity gltf-model="#mouse" mixin="cube" onclick="setScene2()" rotation="90 0 0" position="0 1 -2"
-                scale="0.03 0.03 0.03">
-            </a-entity>
-        </a-entity>
-
-        <!-- scene 2 -->
-
-        <a-entity id="scene2" visible="false" physics="debug: true; gravity: 0;">
-            <!-- <a-entity gltf-model="#mouse" mixin="cube" onclick="setScene3()" rotation="90 0 0" position="0 1 -2"
-                scale="0.03 0.03 0.03">
-            </a-entity> -->
-            <!-- <a-entity onclick="setScene3()" class="cube" mixin="cube" position="0 3.5 1" material="color: #FF0000">
-            </a-entity>
-            <a-entity onclick="setScene3()" class="cube" mixin="cube" position="0 -2.5 1" material="color: #00FF00">
-            </a-entity>
-            <a-entity onclick="setScene3()" class="cube" mixin="cube" position="0.3 0 -1" material="color: #FF00FF">
-            </a-entity>
-            <a-entity onclick="setScene3()" class="cube" mixin="cube" position="-0.3 0 -1" material="color: #0000FF">
-            </a-entity>
-            <a-entity onclick="setScene3()" class="cube" mixin="cube" position="-0.3 0 -1" material="color: #00FFFF">
-            </a-entity> -->
-
             <a-videosphere src="#rgb"></a-videosphere>
             <!-- boundaries -->
 
@@ -185,17 +129,17 @@
             <!-- first layer of pixels -->
 
 
-            <a-entity class="cube" mixin="cube" position="0 1.5 -1" material="color: #000000" body="shape: box;">
+            <a-entity class="cube" mixin="cube" position="0 1.5 -1" material="color: #000000">
             </a-entity>
-            <a-entity class="cube" mixin="cube" position="1 1.5 0" material="color: #000000" body="shape: box;">
+            <a-entity class="cube" mixin="cube" position="1 1.5 0" material="color: #000000">
             </a-entity>
-            <a-entity class="cube" mixin="cube" position="-1 1.5 0" material="color: #000000" body="shape: box;">
+            <a-entity class="cube" mixin="cube" position="-1 1.5 0" material="color: #000000">
             </a-entity>
-            <a-entity class="cube" mixin="cube" position="0 0.5 0" material="color: #000000" body="shape: box;">
+            <a-entity class="cube" mixin="cube" position="0 0.5 0" material="color: #000000">
             </a-entity>
-            <a-entity class="cube" mixin="cube" position="0 2.5 0" material="color: #000000" body="shape: box;">
+            <a-entity class="cube" mixin="cube" position="0 2.5 0" material="color: #000000">
             </a-entity>
-            <a-entity class="cube" mixin="cube" position="0 1.5 1" material="color: #000000" body="shape: box;">
+            <a-entity class="cube" mixin="cube" position="0 1.5 1" material="color: #000000">
             </a-entity>
 
             <!-- second layer of pixels -->
@@ -400,40 +344,124 @@
             <a-entity class="cube" mixin="cube" position="-3.3 1.3 3" material="color: #0000FF"></a-entity>
             <a-entity class="cube" mixin="cube" position="-3 1.3 3" material="color: #00FFFF"></a-entity>
 
+            <!-- <a-entity onclick="setScene2()" class="cube" mixin="cube" position="0 0 1" material="color: #FF0000"> -->
+            <a-entity gltf-model="#mouse" mixin="cube" onclick="setScene2()" rotation="90 0 0" position="0 1 -2"
+                scale="0.03 0.03 0.03">
+            </a-entity>
+        </a-entity>
+
+        <!-- scene 2 -->
+
+        <a-entity id="scene2" visible="false" physics="debug: true; gravity: 0;">
+            <!-- background video overlays -->
+            <a-videosphere src="#mac1" rotation="0 -90 0" loop="true" segments-width="0.01" segments-height="0.01"
+                opacity="0.5">
+            </a-videosphere>
+            <a-videosphere src="#mac1" rotation="90 0 0" loop="true" segments-width="0.01" segments-height="0.01"
+                opacity="0.5">
+            </a-videosphere>
+            <a-videosphere src="#mac1" rotation="0 0 90" loop="true" segments-width="0.01" segments-height="0.01"
+                opacity="0.5">
+            </a-videosphere>
+            <a-videosphere src="#mac1" rotation="0 90 0" loop="true" segments-width="0.01" segments-height="0.01"
+                opacity="1">
+            </a-videosphere>
+            <!-- <a-video src=" #bootup" autoplay width="15" height="10" position="0 1.6 -1"
+                animation="property: visible; to: false; delay: 7700;"> -->
+            </a-video>
+            <!-- <a-sky src="#360photo"></a-sky> -->
+
+
+            <a-image src="#mac2" position="0 1.6 -25" height="20" width="30" rotation="0 0 0" scale="2 2 2"></a-image>
+            <a-box src="#graph" position="0 1 -3" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false">
+            </a-box>
+            <a-box src="#control" position="-2 1 -3" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false">
+            </a-box>
+            <a-box src="#control2" position="-2 2 -2" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false">
+            </a-box>
+            <a-box src="#graphcontrols" position="1 2 -3" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false">
+            </a-box>
+            <a-box src="#building" position="-1 2 -2.5" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false">
+            </a-box>
+            <a-box src="#map" position="2 1 -3" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"></a-box>
+            <a-entity gltf-model="#model" rotation="0 -90 0" position="0 -232 -51" scale="0.3 0.4 0.45">
+            </a-entity>
+            <!-- <a-entity gltf-model="#mouse" mixin="cube" onclick="setScene3()" rotation="90 0 0" position="0 1 -2"
+                scale="0.03 0.03 0.03">
+            </a-entity> -->
+            <!-- <a-entity onclick="setScene3()" class="cube" mixin="cube" position="0 3.5 1" material="color: #FF0000">
+            </a-entity>
+            <a-entity onclick="setScene3()" class="cube" mixin="cube" position="0 -2.5 1" material="color: #00FF00">
+            </a-entity>
+            <a-entity onclick="setScene3()" class="cube" mixin="cube" position="0.3 0 -1" material="color: #FF00FF">
+            </a-entity>
+            <a-entity onclick="setScene3()" class="cube" mixin="cube" position="-0.3 0 -1" material="color: #0000FF">
+            </a-entity>
+            <a-entity onclick="setScene3()" class="cube" mixin="cube" position="-0.3 0 -1" material="color: #00FFFF">
+            </a-entity> -->
+
+
+
 
         </a-entity>
         <a-entity id="scene3" visible="false">
-            <!-- <a-box id="boxscreen" src="#texture" opacity="0.7" height="10" width="10" position="0 0 -5"
-                animation__mouseenter="_event: mousedown; property: rotation; to: 180 0 0; dur: 5000; easing: easeOutElastic; loop: true; delay: 2000">
-            </a-box> -->
-            <a-entity class="cube" mixin="cube" position="0 0 -5" scale="10 10 10" material="color: #890088"></a-entity>
-            <a-box box-item color="#890088" height="10" depth="10" width="10" position="0 -10 0" rotation="90 90 90"
-                event-set__down="_event: mousedown; rotation: 0 90 0; dur: 500; easing: easeInOutElastic"></a-box>
-            <a-box src="#texture" height="10" width="10" position="-5 0 0" rotation="0 -90 0"></a-box>
-            <a-box color="#060606" height="10" width="10" position="0 0 5" rotation="0 0 90"></a-box>
-            <a-box color="#777777" height="10" width="10" position="0 5 0" rotation="90 0 90"></a-box>
-
-            <!-- second room layer -->
-            <a-box color="#900900" height="10" width="10" position="5 0 -5" rotation="0 90 0"></a-box>
-            <a-box color="#777777" height="10" width="10" position="0 5 -5" rotation="90 0 90"></a-box>
-            <a-box src="#texture" height="10" width="10" position="-5 0 -5" rotation="0 -90 0"></a-box>
-        </a-entity>
-        <a-entity id="scene4" visible="false">
-            <sky src="#360photo"></sky>
+            <a-sky src="#desktop"></a-sky>
+            <!-- <a-videosphere src="#boxspace"></a-videosphere> -->
             <a-entity onclick="setScene1()" class="cube" mixin="cube" position="0 0 1" material="color: #FF0000">
             </a-entity>
+            <a-box position="-20 0 -5" scale="10 10 10" material="color: #890088" hoverable grabbable stretchable
+                draggable droppable></a-box>
             <a-curvedimage src="#mac2" height="3" radius="5" theta-length="60" rotation="0 90 0" scale="1 1 1" hoverable
                 grabbable stretchable draggable droppable
                 event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.5 1 1.5"
                 event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
             </a-curvedimage>
-            <a-curvedimage src="#mac2" height="3" radius="5" theta-length="60" rotation="0 90 0" scale="1 1 1" hoverable
+            <a-curvedimage src="#mac2" height="3" radius="5" theta-length="60" rotation="0 -90 0" scale="1 1 1"
+                hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.5 1 1.5"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
+            </a-curvedimage>
+            <a-curvedimage src="#mac2" height="3" radius="5" theta-length="60" rotation="0 180 0" scale="1 1 1"
+                hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.5 1 1.5"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
+            </a-curvedimage>
+            <a-curvedimage src="#mac2" height="3" radius="5" theta-length="60" rotation="0 0 0" scale="1 1 1" hoverable
                 grabbable stretchable draggable droppable
                 event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.5 1 1.5"
                 event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
             </a-curvedimage>
-            <a-curvedimage src="#mac2" height="3" radius="5" theta-length="60" rotation="0 90 0" scale="1 1 1" hoverable
-                grabbable stretchable draggable droppable
+
+            <!-- layer 2 -->
+            <a-curvedimage src="#mac2" height="3" radius="5" theta-length="60" position="0 5 0" rotation="0 135 0"
+                scale="1 1 1" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.5 1 1.5"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
+            </a-curvedimage>
+            <a-curvedimage src="#mac2" height="3" radius="5" theta-length="60" position="0 5 0" rotation="0 -135 0"
+                scale="1 1 1" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.5 1 1.5"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
+            </a-curvedimage>
+            <a-curvedimage src="#mac2" height="3" radius="5" theta-length="60" position="0 5 0" rotation="0 225 0"
+                scale="1 1 1" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.5 1 1.5"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
+            </a-curvedimage>
+            <a-curvedimage src="#mac2" height="3" radius="5" theta-length="60" position="0 5 0" rotation="0 0 0"
+                scale="1 1 1" hoverable grabbable stretchable draggable droppable
                 event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.5 1 1.5"
                 event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
             </a-curvedimage>
