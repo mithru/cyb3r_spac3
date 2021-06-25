@@ -162,18 +162,18 @@
                 <source type="video/mp4" src="assets/youtube.mov" />
             </video>
         </a-assets>
-        <a-entity hand-controls="hand: left; handModelStyle: lowPoly; color:#ffcccc" raycaster="objects: cube" grabbable
+        <!-- <a-entity hand-controls="hand: left; handModelStyle: lowPoly; color:#ffcccc" raycaster="objects: cube" grabbable
             dropable oculus-touch-controls super-hands window-motion-controls>
         </a-entity>
         <a-entity hand-controls="hand: right; handModelStyle: lowPoly; color:#ffcccc" raycaster="objects: cube"
             grabbable dropable oculus-touch-controls super-hands window-motion-controls>
-        </a-entity>
-        <!-- <a-entity laser-controls="hand: left" raycaster="objects: cube" grab oculus-touch-controls
-            window-motion-controls>
-        </a-entity>
-        <a-entity laser-controls="hand: right" raycaster="objects: cube" grab oculus-touch-controls
-            window-motion-controls>
         </a-entity> -->
+        <a-entity laser-controls="hand: left" raycaster="objects: cube" mixin="cube" grabbable dropable
+            oculus-touch-controls super-hands window-motion-controls>
+        </a-entity>
+        <a-entity laser-controls="hand: right" raycaster="objects: cube" mixin="cube" grabbable dropable
+            oculus-touch-controls super-hands window-motion-controls>
+        </a-entity>
         <!-- <a-entity>
             <a-camera positon="0 1.6 0"></a-camera>
             <a-entity id="rhand" mixin="touch" hand-controls="hand: right">
