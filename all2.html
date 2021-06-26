@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/super-hands@^3.0.1/dist/super-hands.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v3.13.1/dist/aframe-extras.min.js"></script>
+
+
+    <title>cyb3r_spac3</title>
+
+    <!-- javascript to transition scenes on click -->
+    <script>
+        function setScene2() {
+            document.getElementById('scene1').setAttribute('visible', 'false');
+            document.getElementById('scene2').setAttribute('visible', 'true');
+        }
+
+        function setScene3() {
+            document.getElementById('scene2').setAttribute('visible', 'false');
+            document.getElementById('scene3').setAttribute('visible', 'true');
+        }
+
+        function setScene1() {
+            document.getElementById('scene3').setAttribute('visible', 'false');
+            document.getElementById('scene1').setAttribute('visible', 'true');
+        }
+
+        function appOpen() {
+            document.getElementById('window').setAttribute('visible', 'true');
+            document.getElementById('window1').setAttribute('visible', 'true');
+            document.getElementById('window2').setAttribute('visible', 'true');
+            document.getElementById('window3').setAttribute('visible', 'true');
+            document.getElementById('window4').setAttribute('visible', 'true');
+            document.getElementById('window5').setAttribute('visible', 'true');
+            document.getElementById('window6').setAttribute('visible', 'true');
+        }
+
+        function firefox() {
+            document.getElementById('firefox').setAttribute('visible', 'true');
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <a-scene physics="gravity: 0;" webxr="referenceSpaceType: local">
+         <a-assets>
+            <!-- box component mixin -->
+            <a-mixin id="cube" class="cube" geometry="primitive: box; width: 1; height: 1; depth: 1" hoverable grabbable
+                stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false" body="shape: box">
+            </a-mixin>
+
+            <!-- scene 1 assets -->
+            <video id="rgb" style="display:none" autoplay loop crossorigin="anonymous" muted playsinline
+                webkit-playsinline>
+                <!-- MP4 video source. -->
+                <source type="video/mp4" src="assets/staticaudiorgb.mp4" />
+            </video>
+            <video id="grain" style="display:none" autoplay loop crossorigin="anonymous" playsinline webkit-playsinline>
+                <!-- MP4 video source. -->
+                <source type="video/mp4" src="assets/grain.mp4" />
+            </video>
+
+            <!-- scene 2 assets -->
+            <img src="assets/black.jpg" id="360photo">
+            <image id="error" src="assets/windows/error.png"></image>
+            <image id="mschart" src="assets/windows/mschart.png"></image>
+            <image id="chess" src="assets/windows/chess.png"></image>
+            <image id="art" src="assets/windows/art.png"></image>
+            <image id="taipan" src="assets/windows/taipan.png"></image>
+            <image id="hall" src="assets/windows/hall.png"></image>
+            <image id="lab" src="assets/windows/lab.png"></image>
+            <image id="mac2" src="assets/mac.png"></image>
+            <image id="graph" src="assets/graph1.png"></image>
+            <image id="map" src="assets/map.png"></image>
+            <image id="control" src="assets/controlpanel.png"></image>
+            <image id="control2" src="assets/controls2.png"></image>
+            <image id="graphcontrols" src="assets/graphcontrols.png"></image>
+            <image id="building" src="assets/building.png"></image>
+            <a-asset-item id="model" src="assets/lisa/scene.gltf"></a-asset-item>
+            <a-asset-item id="mouse" src="assets/mouse_cursor/scene.gltf"></a-asset-item>
+            <video id="bootup" style="display:none" autoplay src="assets/bootup.mp4" crossorigin="anonymous" playsinline
+                webkit-playsinline>
+            </video>
+            <video id="mac1" style="display:none" autoplay loop="true" volume="0" muted crossorigin="anonymous"
+                playsinline webkit-playsinline>
+                <!-- MP4 video source. -->
+                <source type="video/mp4" src="assets/extrudedwindows_1.mp4" />
+            </video>
+
+            <video id="original" style="display:none" autoplay loop="true" volume="0" muted crossorigin="anonymous"
+                playsinline webkit-playsinline>
+                <!-- MP4 video source. -->
+                <source type="video/mp4" src="assets/windows1.mp4" />
+            </video>
+
+            <!-- scene 3 assets -->
+            <video id="audio" style="display:none" autoplay loop="true" volume="0" crossorigin="anonymous" playsinline
+                webkit-playsinline>
+                <!-- MP4 video source. -->
+                <source type="video/mp4" src="assets/fullaudioblack.mp4" />
+            </video>
+            <image id="desktop" src="assets/vrdesktop.jpg"></image>
+            <!-- apps -->
+            <image id="psdicon" src="assets/apps/psdicon.png"></image>
+            <image id="fireapp" src="assets/apps/firefox.png"></image>
+            <image id="papp" src="assets/apps/processing.jpeg"></image>
+            <image id="term" src="assets/apps/terminallogo.png"></image>
+            <image id="finder" src="assets/apps/finder.png"></image>
+            <!-- windows -->
+            <image id="psd" src="assets/windows/psd.png"></image>
+            <image id="adj" src="assets/windows/adj.png"></image>
+            <image id="channels" src="assets/windows/channels.png"></image>
+            <image id="color" src="assets/windows/color.png"></image>
+            <image id="shapes" src="assets/windows/shapes.png"></image>
+            <image id="styles" src="assets/windows/styles.png"></image>
+            <image id="swatches" src="assets/windows/swatches.png"></image>
+            <image id="terminal" src="assets/windows/terminal.png"></image>
+            <image id="continue" src="assets/windows/continue.png"></image>
+            <image id="vrbg" src="assets/equirectpixels.png"></image>
+            <image id="notes" src="assets/windows/notesapp.png"></image>
+            <image id="firefox" src="assets/windows/aframe.png"></image>
+            <image id="code" src="assets/code.png"></image>
+            <image id="processing" src="assets/windows/processing.png"></image>
+            <image id="glitch" src="assets/windows/glitch.png"></image>
+            <video id="wip" style="display:none" autoplay loop="true" volume="0" muted crossorigin="anonymous"
+                playsinline webkit-playsinline>
+                <!-- MP4 video source. -->
+                <source type="video/mp4" src="assets/trimmedhandswip.mov" />
+            </video>
+            <video id="ai" style="display:none" autoplay loop="true" volume="0" muted crossorigin="anonymous"
+                playsinline webkit-playsinline>
+                <!-- MP4 video source. -->
+                <source type="video/mp4" src="assets/aivideo.mp4" />
+            </video>
+            <video id="pce" style="display:none" autoplay loop="true" volume="0" muted crossorigin="anonymous"
+                playsinline webkit-playsinline>
+                <!-- MP4 video source. -->
+                <source type="video/mp4" src="assets/pce.mov" />
+            </video>
+            <video id="youtube" style="display:none" autoplay loop="true" volume="0" muted crossorigin="anonymous"
+                playsinline webkit-playsinline>
+                <!-- MP4 video source. -->
+                <source type="video/mp4" src="assets/youtube.mov" />
+            </video>
+        </a-assets>
+        
+        <!-- camera -->
+        <a-entity position="0 1.6 0" camera look-controls wasd-controls></a-entity>
+
+        <a-entity laser-controls="hand: left" raycaster="lineColor: red; objects: .cube">
+        </a-entity>
+        
+        <a-entity laser-controls="hand: right" raycaster="lineColor: blue; objects: .cube">
+        </a-entity>
+
+
+        <!-- scene 1 -->
+        <a-entity id="scene1" visible="true">
+            <a-videosphere src="#audio"></a-videosphere>
+            <a-videosphere src="#rgb" muted></a-videosphere>
+            <a-videosphere src="#rgb" muted rotation="90 0 0" loop="true" segments-width="0.01" segments-height="0.01"
+                opacity="0.3"></a-videosphere>
+            <a-videosphere src="#rgb" rotation="0 180 0" loop="true" segments-width="0.01" segments-height="0.01"
+                opacity="0.3"></a-videosphere>
+            <!-- <a-video src=" #grain" autoplay width="15" height="10" position="0 1.6 -1"
+                animation="property: visible; to: false; delay: 7700; dur: 3000"></a-video> -->
+            <!-- boundaries -->
+            <!-- <a-video src=" #grain" autoplay width="15" height="10" position="0 1.6 -1" scale="50 50 1"
+                position="0 -15 0" rotation="90 0 0"></a-video> -->
+
+            <a-plane transparent="true" material="opacity: 0.0; transparent: true" scale="50 50 1" visible="false"
+                position="0 -3.4 0" rotation="90 0 0" static-body></a-plane>
+            <a-plane material="opacity: 0.0; transparent: true" scale="50 50 1" visible="false" position="0 0 5"
+                rotation="0 0 0" static-body></a-plane>
+            <a-plane transparent="true" material="opacity: 0.0; transparent: true" scale="50 50 1" visible="false"
+                position="0 0 -5" rotation="0 180 0" static-body></a-plane>
+            <a-plane material="opacity: 0.0; transparent: true" scale="50 50 1" visible="false" position="0 6.6 0"
+                rotation="-90 0 0" static-body></a-plane>
+            <a-plane material="opacity: 0.0; transparent: true" scale="50 50 1" visible="false" position="5 0 0"
+                rotation="0 90 -90" static-body></a-plane>
+            <a-plane material="opacity: 0.0; transparent: true" scale="50 50 1" visible="false" position="-5 0 0"
+                rotation="0 -90 90" static-body></a-plane>
+
+            <!-- first layer of pixels -->
+
+
+            <a-entity class="cube" mixin="cube" position="0 1.5 -1" material="color: #000000">
+            </a-entity>
+            <a-entity class="cube" mixin="cube" position="1 1.5 0" material="color: #000000">
+            </a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 1.5 0" material="color: #000000">
+            </a-entity>
+            <a-entity class="cube" mixin="cube" position="0 0.5 0" material="color: #000000">
+            </a-entity>
+            <a-entity class="cube" mixin="cube" position="0 2.5 0" material="color: #000000">
+            </a-entity>
+            <a-entity class="cube" mixin="cube" position="0 1.5 1" material="color: #000000">
+            </a-entity>
+
+            <!-- second layer of pixels -->
+
+            <a-entity class="cube" mixin="cube" position="0 3.5 1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 -2.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0.3 0 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 0 -1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 0 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="0.3 1 0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 0.3 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 0.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 0 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="0.3 0.3 -0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0.5 1 0.3" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0.3 0.3 0" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 0.3 0" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="0 1.7 -1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1.2 1.5 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 1.7 0" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0.3 0.3 0" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 0.3 0" material="color: #00FFFF"></a-entity>
+
+
+            <a-entity class="cube" mixin="cube" position="0 3.5 1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 -2.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0.3 0 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 0 -3" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 0 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="3.3 1 0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3 0.3 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 1 -3" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 0.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3 0 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="0.3 3.3 -0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3.5 1 0.3" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 3 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3.3 3.3 0" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 3.3 0" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="0 3.7 -3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3.2 3.5 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3 3.7 0" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3.3 3.3 3" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3 3.3 3" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="-2 3.5 1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 -2.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1.3 -4 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 0 -1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-2.3 0 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="0.3 -2 0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 0.3 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 -1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1.3 0.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 0 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="-3.3 -0.3 -0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.5 1 0.3" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0.3 -1.3 0" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-2 2.3 0" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="0 -1.7 -1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1.2 1.5 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 -1.7 0" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-2.3 0.3 0" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 -2.3 0" material="color: #00FFFF"></a-entity>
+
+
+            <a-entity class="cube" mixin="cube" position="0 -3.5 1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 -2.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 -1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 0 -3" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 0 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="3.3 -1 0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3 0.3 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 -1 -3" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 -0.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3 0 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="-1.3 3.3 -0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.5 1 0.3" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 -3 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 -3.3 0" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 3.3 0" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="-1 3.7 -3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.2 3.5 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3 3.7 0" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 0.3 3" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3 3.3 3" material="color: #00FFFF"></a-entity>
+
+
+
+            <!-- repeat -->
+
+            <a-entity class="cube" mixin="cube" position="1 3.5 1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 -2.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0.3 1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1.3 0 -1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 1 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="1.3 1 0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 1.3 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 1.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 1 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="0.3 1.3 -0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0.5 1 1.3" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1.3 0.3 0" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 1.3 0" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="1 1.7 -1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1.2 1.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 1.7 1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0.3 0.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="0 1.3 1" material="color: #00FFFF"></a-entity>
+
+
+            <a-entity class="cube" mixin="cube" position="1 3.5 1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 -2.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1.3 0 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1.3 0 -3" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 1 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="3.3 1 1.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3 1.3 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 1 -3" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 1.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3 1 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="1.3 3.3 -0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3.5 1 1.3" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 3 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3.3 3.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 3.3 0" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="1 3.7 -3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3.2 3.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3 3.7 1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3.3 -3.3 3" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="3 3.3 -3" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="-2 3.5 1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 -2.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1.3 -4 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 1 -1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-2.3 1 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="1.3 -2 0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 1.3 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 -1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1.3 1.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 0 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="-3.3 -1.3 -0.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1.5 1 0.3" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1.3 -1.3 0" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-2 2.3 1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="1 -1.7 -1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1.2 1.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 -1.7 1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-2.3 0.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 -2.3 0" material="color: #00FFFF"></a-entity>
+
+
+            <a-entity class="cube" mixin="cube" position="1 -3.5 1" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 -2.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1.3 -1 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-0.3 1 -3" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 1 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="3.3 -1 1.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3 1.3 0" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-1 -1 -3" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 -1.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3 1 -1" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="-1.3 3.3 -1.3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.5 1 1.3" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 -3 -1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 -3.3 1" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="1 3.3 0" material="color: #00FFFF"></a-entity>
+
+            <a-entity class="cube" mixin="cube" position="-1 3.7 -3" material="color: #FF0000"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.2 3.5 1" material="color: #00FF00"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3 3.7 1" material="color: #FF00FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3.3 1.3 3" material="color: #0000FF"></a-entity>
+            <a-entity class="cube" mixin="cube" position="-3 1.3 3" material="color: #00FFFF"></a-entity>
+
+            <!-- <a-entity onclick="setScene2()" class="cube" mixin="cube" position="0 0 1" material="color: #FF0000"> -->
+            <a-entity gltf-model="#mouse" mixin="cube" onclick="setScene2()" rotation="90 0 0" position="0 1 -2"
+                scale="0.03 0.03 0.03">
+            </a-entity>
+        </a-entity>
+
+        <!-- scene 2 -->
+
+        <a-entity id="scene2" visible="false" physics="debug: true; gravity: 0;">
+            <!-- background video overlays -->
+            <a-videosphere src="#mac1" muted rotation="0 -90 0" loop="true" segments-width="0.01" segments-height="0.01"
+                opacity="0.5">
+            </a-videosphere>
+            <a-videosphere src="#mac1" muted rotation="90 0 0" loop="true" segments-width="0.01" segments-height="0.01"
+                opacity="0.5">
+            </a-videosphere>
+            <a-videosphere src="#original" muted rotation="0 0 90" loop="true" segments-width="0.01"
+                segments-height="0.01" opacity="0.5">
+            </a-videosphere>
+            <a-videosphere src="#original" muted rotation="0 90 0" loop="true" segments-width="0.01"
+                segments-height="0.01" opacity="1">
+            </a-videosphere>
+            <!-- <a-video src=" #bootup" autoplay width="15" height="10" position="0 1.6 -1"
+                animation="property: visible; to: false; delay: 7700;"> </a-video> -->
+
+            <!-- <a-sky src="#360photo"></a-sky> -->
+
+
+            <a-image src="#mac2" position="0 0.98 -105" height="20" width="30" rotation="0 0 0" scale="2 2 2"></a-image>
+            <!-- <a-image src="#error" scale="3 3 3" height="3" width="6" position="-4 6.6 -125"
+                animation="property: scale; to: 2.7 2.7 2.7; delay: 300; dur: 6000; loop: true; easing: easeOutElastic">
+            </a-image> -->
+            <a-box src="#error" scale="3 3 3" height="1" width="2" depth="1" position="0 1.6 -15"
+                animation="property: scale; to: 2.7 2.7 2.7; delay: 300; dur: 6000; loop: true; easing: easeOutElastic">
+            </a-box>
+
+            <!-- windows -->
+            <a-box src="#graph" position="0 0 -25" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false">
+            </a-box>
+            <a-box src="#control" position="-1 1 -26" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false">
+            </a-box>
+            <a-box src="#control2" position="0 2 -25.5" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false">
+            </a-box>
+            <a-box src="#graphcontrols" position="2 2.5 -27.5" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false">
+            </a-box>
+            <a-box src="#building" position="-0.5 0 -26.5" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false">
+            </a-box>
+            <a-box src="#map" position="1 1 -25" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"></a-box>
+
+            <a-box src="#mschart" position="-1.5 -0.5 -25" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"></a-box>
+
+            <a-box src="#chess" position="2 1 -26" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"></a-box>
+
+            <a-box src="#art" position="0.75 2 -26" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"></a-box>
+
+            <a-box src="#hall" position="-1 2 -27" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"></a-box>
+
+            <a-box src="#lab" position="0 1.2 -27" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"></a-box>
+
+            <a-box src="#taipan" position="-1.5 2.2 -25" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"></a-box>
+
+            <a-entity gltf-model="#model" rotation="0 -90 0" position="0 -232 -131" scale="0.3 0.4 0.45">
+            </a-entity>
+
+            <!-- transition to scene 3 -->
+            <a-box src="#continue" position="0 1 -27.5" height="1" width="2" depth="1" onclick="setScene3()"
+                animation="property: scale; to: 1.1 1.1 1.1; delay: 300; dur: 6000; loop: true; easing: easeOutElastic">
+            </a-box>
+
+        </a-entity>
+
+        <!-- scene 3 -->
+        <a-entity id="scene3" visible="false">
+            <a-sky src="#desktop"></a-sky>
+
+            <!-- transition to credits -->
+            <a-curvedimage src="#notes" height="3" radius="3" theta-length="70" position="2 1.5 -25" rotation="0 90 0"
+                scale="1 1 1" hoverable grabbable stretchable draggable droppable
+                animation="property: scale; to: 1.3 1.3 1.3; dur: 3000; loop: true; easing: easeOutElastic"
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.1 1.1 1.1"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
+            </a-curvedimage>
+
+            <!-- windows -->
+            <a-curvedimage src="#firefox" id="firefox" visible="true" height="3" radius="5" theta-length="60"
+                position="7 2 -21" rotation="0 45 0" scale="1 1 1" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.1 1.1 1.1"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
+            </a-curvedimage>
+            <a-curvedimage src="#code" height="3" radius="5" theta-length="30" position="0 0 -21" rotation="0 180 0"
+                scale="1 1 1" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.1 1.1 1.1"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
+            </a-curvedimage>
+            <a-curvedimage src="#terminal" height="3" radius="5" theta-length="50" position="0 5 -21" rotation="0 135 0"
+                scale="1 1 1" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.1 1.1 1.1"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
+            </a-curvedimage>
+            <a-curvedimage src="#glitch" height="3" radius="5" theta-length="50" position="0 0 -18" rotation="0 0 0"
+                scale="1 1 1" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.1 1.1 1.1"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
+            </a-curvedimage>
+
+            <a-curvedimage src="#processing" height="3" radius="5" theta-length="30" position="0 5 -20" rotation="0 0 0"
+                scale="1 1 1" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.1 1.1 1.1"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
+            </a-curvedimage>
+
+            <!-- photoshop -->
+            <a-curvedimage src="#psd" id="window" visible="false" height="3" radius="5" theta-length="60"
+                position="-3 3 -17" rotation="0 -100 0" scale="1 1 1" hoverable grabbable stretchable draggable
+                droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.1 1.1 1.1"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
+            </a-curvedimage>
+            <a-image id="window2" src="#channels" visible="false" position="-2.2 4 -17" rotation="0 130 0" hoverable
+                grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.1 1.1 1.1"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
+            </a-image>
+            <a-image id="window3" src="#color" visible="false" position="-1.5 4.2 -17" rotation="0 130 0" hoverable
+                grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.1 1.1 1.1"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
+            </a-image>
+            <a-image id="window4" src="#shapes" visible="false" position="-3 4.1 -17" rotation="0 130 0" hoverable
+                grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.1 1.1 1.1"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
+            </a-image>
+            <a-image id="window5" src="#styles" visible="false" position="-3.3 4 -17" rotation="0 130 0" hoverable
+                grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.1 1.1 1.1"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
+            </a-image>
+            <a-image id="window6" src="#swatches" visible="false" position="-2.5 3 -17" rotation="0 130 0" hoverable
+                grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.1 1.1 1.1"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
+            </a-image>
+            <a-image id="window1" src="#adj" visible="false" position="-1.5 4 -17" rotation="0 130 0" hoverable
+                grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.1 1.1 1.1"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
+            </a-image>
+
+            <!-- apps -->
+            <a-box src="#psdicon" position="-7 -1 -17" height="1" width="1" depth="1" hoverable grabbable stretchable
+                draggable droppable onclick="appOpen()"></a-box>
+            <a-box src="#fireapp" position="7 -1 -17" height="1" width="1" depth="1" hoverable grabbable stretchable
+                draggable droppable onclick="firefox()"></a-box>
+            <a-box src="#papp" position="1 -1 -17" height="1" width="1" depth="1" hoverable grabbable stretchable
+                draggable droppable></a-box>
+            <a-box src="#term" position="10 -1 -23" height="1" width="1" depth="1" hoverable grabbable stretchable
+                draggable droppable></a-box>
+            <a-box src="#finder" position="-10 -1 -23" height="1" width="1" depth="1" hoverable grabbable stretchable
+                draggable droppable></a-box>
+
+
+            <!-- videos -->
+            <a-video src="#wip" position="12 6 -8" height="7" width="14" rotation="0 40 0" hoverable grabbable
+                stretchable draggable droppable></a-video>
+            <a-video src="#ai" position="-8 4 -25" height="3" width="6" rotation="0 60 0" hoverable grabbable
+                stretchable draggable droppable></a-video>
+            <a-video src="#pce" position="-8 6 -17" height="3" width="4.5" rotation="0 100 0" hoverable grabbable
+                stretchable draggable droppable></a-video>
+            <a-video src="#youtube" position="10 5 -22" height="3" width="5" rotation="0 100 0" hoverable grabbable
+                stretchable draggable droppable></a-video>
+        </a-entity>
+    </a-scene>
+</body>
+
+</html>
