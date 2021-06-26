@@ -53,14 +53,7 @@
 <body>
 
     <a-scene physics="gravity: 0;" webxr="referenceSpaceType: local">
-        <!-- camera -->
-        <a-entity movement-controls="speed: 3.5" camera look-controls wasd-controls position="0 1.6 0" capture-mouse
-            raycaster cursor="rayOrigin:mouse" body="type: static; shape: sphere; sphereRadius: 0.001" super-hands="colliderEvent: raycaster-intersection;
-                             colliderEventProperty: els;
-                             colliderEndEvent:raycaster-intersection-cleared;
-                             colliderEndEventProperty: clearedEls;">
-        </a-entity>
-        <a-assets>
+         <a-assets>
             <!-- box component mixin -->
             <a-mixin id="cube" class="cube" geometry="primitive: box; width: 1; height: 1; depth: 1" hoverable grabbable
                 stretchable draggable droppable
@@ -162,25 +155,18 @@
                 <source type="video/mp4" src="assets/youtube.mov" />
             </video>
         </a-assets>
-        <!-- <a-entity hand-controls="hand: left; handModelStyle: lowPoly; color:#ffcccc" raycaster="objects: cube" grabbable
-            dropable oculus-touch-controls super-hands window-motion-controls>
-        </a-entity>
-        <a-entity hand-controls="hand: right; handModelStyle: lowPoly; color:#ffcccc" raycaster="objects: cube"
-            grabbable dropable oculus-touch-controls super-hands window-motion-controls>
-        </a-entity> -->
-        <a-entity laser-controls="hand: left" raycaster="objects: cube" grabbable dropable oculus-touch-controls
+        
+        <!-- camera -->
+        <a-entity position="0 1.6 0" camera look-controls wasd-controls></a-entity>
+
+        <a-entity laser-controls="hand: left" raycaster="objects: .cube" grabbable dropable oculus-touch-controls
             super-hands window-motion-controls>
         </a-entity>
-        <a-entity laser-controls="hand: right" raycaster="objects: cube" grabbable dropable oculus-touch-controls
+        
+        <a-entity laser-controls="hand: right" raycaster="objects: .cube" grabbable dropable oculus-touch-controls
             super-hands window-motion-controls>
         </a-entity>
-        <!-- <a-entity>
-            <a-camera positon="0 1.6 0"></a-camera>
-            <a-entity id="rhand" mixin="touch" hand-controls="hand: right">
-            </a-entity>
-            <a-entity id="lhand" mixin="touch" hand-controls="hand: left">
-            </a-entity>
-        </a-entity> -->
+
 
         <!-- scene 1 -->
         <a-entity id="scene1" visible="true">
